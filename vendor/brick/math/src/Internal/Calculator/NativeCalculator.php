@@ -54,31 +54,16 @@ class NativeCalculator extends Calculator
     public function add(string $a, string $b) : string
     {
         $result = $a + $b;
-
-        if (is_int($result)) {
-            return (string) $result;
-        }
-
-        if ($a === '0') {
-            return $b;
-        }
-
-        if ($b === '0') {
-            return $a;
-        }
-
+        if (is_int($result)) {return (string) $result;}
+        if ($a === '0') {return $b;}
+        if ($b === '0') {return $a;}
         [$aNeg, $bNeg, $aDig, $bDig] = $this->init($a, $b);
-
         if ($aNeg === $bNeg) {
             $result = $this->doAdd($aDig, $bDig);
         } else {
             $result = $this->doSub($aDig, $bDig);
         }
-
-        if ($aNeg) {
-            $result = $this->neg($result);
-        }
-
+        if ($aNeg) {$result = $this->neg($result);}
         return $result;
     }
 
