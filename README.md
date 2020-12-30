@@ -7,5 +7,3 @@
 		<li>php artisan passport:install --force</li>
 	</ul>
 </ul>
-
-
