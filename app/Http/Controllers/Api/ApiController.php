@@ -45,7 +45,10 @@ class ApiController extends Controller
                 $user->otpvalidtill = date('Y-m-d h:i:s',strtotime('+ 30 minutes'));
                 $user->save();
                 sendOTPonMobile($user->mobile,$user->otp);
-                return sendResponse('an One time password has been sent to your mobile.');
+                $data = [
+                	'OTP_for_Testing' => $user->otp
+                ];
+                return sendResponse('an One time password has been sent to your mobile.',$data);
 			}
 			return errorResponse('this phone number is not registered with us');
 		}
@@ -275,7 +278,7 @@ class ApiController extends Controller
 			'product_name' => 'required|string|max:200',
 			'product_sr_no' => 'required',
 			'product_image' => '',
-			'brand' => 'required',
+			'brand_id' => 'required|min:1|numeric',
 			'dealer_name' => 'required|string|max:200',
 			'date_of_purchase' => 'required|date',
 			'invoice_no' => 'required',
@@ -289,7 +292,7 @@ class ApiController extends Controller
 			$product->product_name = $req->product_name;
 			$product->product_sr_no = $req->product_sr_no;
 			// $product->product_image = $req->product_image;
-			$product->brand = $req->brand;
+			$product->brand_id = $req->brand_id;
 			$product->dealer_name = $req->dealer_name;
 			$product->date_of_purchase = $req->date_of_purchase;
 			$product->invoice_no = $req->invoice_no;
@@ -309,7 +312,7 @@ class ApiController extends Controller
 			'product_name' => 'required|string|max:200',
 			'product_sr_no' => 'required',
 			// 'product_image' => 'required',
-			'brand' => 'required',
+			'brand_id' => 'required|min:1|numeric',
 			'dealer_name' => 'required|string|max:200',
 			'date_of_purchase' => 'required|date',
 			'invoice_no' => 'required',
@@ -324,7 +327,7 @@ class ApiController extends Controller
 				$product->product_name = $req->product_name;
 				$product->product_sr_no = $req->product_sr_no;
 				// $product->product_image = $req->product_image;
-				$product->brand = $req->brand;
+				$product->brand_id = $req->brand_id;
 				$product->dealer_name = $req->dealer_name;
 				$product->date_of_purchase = date('Y-m-d',strtotime($req->date_of_purchase));
 				$product->invoice_no = $req->invoice_no;
