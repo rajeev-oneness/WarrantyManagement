@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('mobile',20);
             $table->string('otp',10);
+            $table->string('otpvalidtill',25);
             $table->string('address');
             $table->string('city');
             $table->string('pincode',10);
